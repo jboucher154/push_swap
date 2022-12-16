@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/16 12:13:09 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:22:40 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*rrr(t_list **head1, t_list **head2);
 //list utilities
 int		*make_int_content(int num);
 void	del_int_content(void *data);
+void	del_str_content(void *data);
 void	print_list(t_list *head);
 t_list	*lst_pop(t_list **to_remove);
 
