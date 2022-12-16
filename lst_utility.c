@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:00:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/15 13:27:39 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/16 14:22:10 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	*make_int_content(int num)
 void	del_int_content(void *data)
 {
 	free(data);
+	data = NULL;
+}
+
+void	del_str_content(void *data)
+{
 	data = NULL;
 }
 
