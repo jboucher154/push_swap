@@ -6,13 +6,13 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:00:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/13 12:07:31 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:27:39 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*make_content(int num)
+int	*make_int_content(int num)
 {
 	int	*ptr;
 
@@ -21,7 +21,7 @@ int	*make_content(int num)
 	return (ptr);
 }
 
-void	del_content(void *data)
+void	del_int_content(void *data)
 {
 	free(data);
 	data = NULL;

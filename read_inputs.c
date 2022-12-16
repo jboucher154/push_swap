@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:58:36 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/13 12:10:24 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:42:13 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	generate_stack(char **strs, t_list **head, int arg_str)
 		if (!is_int(strs[i]))
 			return (0);
 		num = ft_atoi(strs[i]);
-		new = ft_lstnew(make_content(num));
+		new = ft_lstnew(make_int_content(num));
 		if (!new)
 			return (0);
 		ft_lstadd_back(head, new);
@@ -68,9 +68,8 @@ t_list	*read_inputs(int argc, char **argv)
 		gen_result = generate_stack(argv, &head, 0);
 	if (gen_result == 0)
 	{
-		ft_lstclear(&head, &del_content);
+		ft_lstclear(&head, &del_int_content);
 		head = NULL;
-		return (head);
 	}
 	return (head);
 }

@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 12:36:41 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/09 12:47:17 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:36:03 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_lstsize(t_list *lst)
 	if (!lst)
 		return (len);
 	temp = lst;
-	while (temp->next)
+	while (temp)
 	{
 		temp = temp->next;
 		len++;
