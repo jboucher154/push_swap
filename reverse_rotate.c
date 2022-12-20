@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 11:59:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/16 12:19:37 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:28:17 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	*rrr(t_list **head_a, t_list **head_b)
 {
 	if (!head_a || !head_b)
 		return (NULL);
-	ra(head_a);
-	rb(head_b);
-	return (rrr);
+	rra(head_a);
+	rrb(head_b);
+	return ("rrr");
 }
+	// ft_printf("rra-> to pop: %i", *((int *)to_pop->data));//
