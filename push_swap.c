@@ -6,63 +6,39 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:31:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/16 14:42:09 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:33:18 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	make_move(t_list **moves, t_list **lst_a, t_list **lst_b)
-{
-	
-}
-
-t_list	*sort_list(t_list *lst_a)
-{
-	t_list	*lst_b;
-	t_list	*moves;
-	t_list	*new;
-	int		len;
-	int 	i;
-
-	lst_b = NULL;
-	moves = NULL;
-	i = 0;
-	len = ft_lstsize(lst_a);
-	if (check_if_sorted(lst_a)) //check if sorted here...
-		return ;//list is already sorted
-	else
-	{
-		while (i <= len / 2)
-		{
-			new = ft_lstnew(pb(&lst_b, &lst_a));
-			if (new)
-				ft_lstadd_back(&moves, new);
-			else
-			{
-				return ;
-				//free and exit;
-			}
-			i++;
-		}
-		// make_move();
-		//otherwse start the sorting?
-	}
-	//free other lists before return
-	return (moves);
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*head;
+	t_list	*moves;
 
 	head = NULL;
 	if (argc > 1)
 		head = read_inputs(argc, argv);
 	if (head == NULL)
 		ft_printf("Error\n");
-	
-	print_list(head);
-	ft_lstclear(&head, &del_int_content);
+	else
+	{
+		// ft_printf("\nbefore moves\n");//
+		moves = sort_list(&head);
+		// if (moves)
+		// 	print_str_list(moves);
+		ft_printf("\nAFTER SORT\n");
+		print_int_list(head);
+		ft_lstclear(&head, &del_int_content);
+		ft_lstclear(&moves, &del_str_content);
+	}
 	return (0);
 }
+
+//this is breaking my code....
+// 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 2 1 1 
+// 890 4 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 1 6 567
+// 890 34567 891 1 6 567 // remove any one of these and it works...
+//but not this
+// 890 4 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 1 6
