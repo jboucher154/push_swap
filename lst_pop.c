@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 11:22:59 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/15 13:36:54 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:47:03 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	pop_head(t_list **to_remove)
 		(*to_remove)->next->previous = NULL;
 		(*to_remove) = (*to_remove)->next;
 	}
+	else
+		(*to_remove) = NULL;
 }
 
 static void	pop_mid(t_list **to_remove)
