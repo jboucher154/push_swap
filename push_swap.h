@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/16 14:22:40 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:46:03 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 t_list	*read_inputs(int argc, char **argv);
 int		check_if_sorted(t_list *head);
+int		check_if_revsorted(t_list *head);
+t_list	*sort_list(t_list **lst_a);
 
 //moves
 char	*sa(t_list **head); //sa, sb
@@ -36,7 +38,8 @@ char	*rrr(t_list **head1, t_list **head2);
 int		*make_int_content(int num);
 void	del_int_content(void *data);
 void	del_str_content(void *data);
-void	print_list(t_list *head);
+void	print_int_list(t_list *head);
 t_list	*lst_pop(t_list **to_remove);
+void	print_str_list(t_list *head);
 
 #endif
