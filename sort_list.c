@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:59:43 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/21 11:47:18 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:52:24 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,6 @@
 
 void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b);
 void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
-
-
-void	add_move(t_list **moves, char *move)
-{
-		t_list	*new;
-
-	new = ft_lstnew(move);
-	if (!new)
-		return ; //exit?
-	ft_lstadd_back(moves, new);
-}
-
-void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len)
-{
-	if (ab_len[0] > 1 && *((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
-	{
-		if (ab_len[1] > 1 && *((int *)(*lst_b)->data) < *((int *)(*lst_b)->next->data))
-			add_move(moves, ss(lst_a, lst_b));
-		else //just swap a
-			add_move(moves, sa(lst_a));
-	}
-}
-
-void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len)
-{
-	if (ab_len[1] > 1 && *((int *)(*lst_b)->data) < *((int *)(*lst_b)->next->data)) //only b needs to move
-	{
-		if (ab_len[1] == 2 && ab_len[0] > 2) // reverse rotate if b is 2, so get extra movement from a
-		{
-			add_move(moves, rrr(lst_a, lst_b));
-		}
-		else //just move b
-		{
-			add_move(moves, sb(lst_b));
-		}
-	}
-}
 
 void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, int rot_count)
 {
@@ -160,7 +123,7 @@ void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b)
 		check_swaps_b(moves, lst_a, lst_b, ab_len);
 		make_moves(moves, lst_a, lst_b);
 	}
-	else//push to b or recombine
+	else //push to b or recombine
 	{
 		add_move(moves, pb(lst_b, lst_a));
 		make_moves(moves, lst_a, lst_b);
