@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 12:40:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/09 12:44:49 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:20:48 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	{
 		(*lst) = (*lst)->next;
 		ft_lstdelone(temp, del);
-		free(temp);
 		temp = *lst;
 	}
 }
