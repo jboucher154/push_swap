@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:59:43 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/21 11:52:24 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:49:19 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *a
 void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, int rot_count)
 {
 	int	ab_len[2];
-	
+		// ft_printf("\nUNROTATED PLACEMENT\n");
 	ab_len[0] = ft_lstsize(*lst_a);
 	ab_len[1] = ft_lstsize(*lst_b);
 
@@ -37,14 +37,15 @@ void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, i
 		rot_count--;
 		ab_len[0] = ft_lstsize(*lst_a);
 		ab_len[1] = ft_lstsize(*lst_b);
-		check_next_placement(moves, lst_a, lst_b, ab_len);
+		if (lst_b && *lst_b)
+			check_next_placement(moves, lst_a, lst_b, ab_len);
 	}
 }
 
 void	needs_rotation(t_list **moves, t_list **lst_a, t_list **lst_b)
 {
 	int	rot_count;
-
+	// ft_printf("\nNEEDS ROTATION\n");
 	rot_count = 0;
 	while ((!(*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->data)) || \
 	 !(*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->next->data))))
@@ -64,6 +65,8 @@ void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *a
 	// print_int_list(*lst_a);//
 	// ft_printf("STACK B\n");//
 	// print_int_list(*lst_b);//
+	if (!lst_b || !(*lst_b))
+		return ;
 	if (*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->data)) //if it fits on top OKAY
 		add_move(moves, pa(lst_a, lst_b));
 	else if (*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->next->data)) //if it fits between top and next OKAY
@@ -90,6 +93,7 @@ void	recombine(t_list **moves, t_list **lst_a, t_list **lst_b)
 	}
 	else if (ab_len[1] > 0) //push to a
 	{
+		// ft_printf("\nto check next placement\n");//
 		check_next_placement(moves, lst_a, lst_b, ab_len);
 		recombine(moves, lst_a, lst_b);
 	}
@@ -103,7 +107,7 @@ void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b)
 	
 	ab_len[0] = ft_lstsize(*lst_a);
 	ab_len[1] = ft_lstsize(*lst_b);
-	if (ab_len[0] == 2)
+	if ((*lst_a)->next->next == NULL) //is len 2
 	{
 		// ft_printf("TO RECOMBINE!\n");
 		// ft_printf("\nSTACK A\n");//
@@ -113,7 +117,7 @@ void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b)
 		recombine(moves, lst_a, lst_b);
 		return ;
 	}
-	if (ab_len[0] > 1 && *((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
+	if ((*lst_a)->next != NULL && *((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
 	{
 		check_swaps_a(moves, lst_a, lst_b, ab_len);
 		make_moves(moves, lst_a, lst_b);
@@ -147,71 +151,35 @@ t_list	*sort_list(t_list **lst_a)
 	return (moves);
 }
 
-// t_list	*sort_list(t_list *lst_a)
+// void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b)
 // {
-// 	t_list	*lst_b;
-// 	t_list	*moves;
-// 	t_list	*new;
-// 	int		len;
-// 	int 	i;
-
-// 	lst_b = NULL;
-// 	moves = NULL;
-// 	i = 0;
-// 	len = ft_lstsize(lst_a);
-// 	if (len == 1)
-// 		return (moves);//list is already sorted
-// 	else
+// 	int	ab_len[2];
+	
+// 	ab_len[0] = ft_lstsize(*lst_a);
+// 	ab_len[1] = ft_lstsize(*lst_b);
+// 	if (ab_len[0] == 2)
 // 	{
-// 		while (i < len / 2)
-// 		{
-// 			new = ft_lstnew(pb(&lst_b, &lst_a));
-// 			if (new)
-// 				ft_lstadd_back(&moves, new);
-// 			else
-// 			{
-// 				ft_lstclear(&lst_a, &del_int_content);
-// 				ft_lstclear(&lst_b, &del_int_content);
-// 				ft_lstclear(&moves, &del_str_content);
-// 				return (NULL);
-// 				//exit??;
-// 			}
-// 			i++;
-// 		}
-// 		ft_printf("MOVES\n");
-// 		print_str_list(moves);
-// 		ft_printf("STACK A\n");
-// 		print_int_list(lst_a);
-// 		ft_printf("STACK B\n");
-// 		print_int_list(lst_b);
-// 		make_move(&moves, &lst_a, &lst_b);
-// 		ft_printf("--------AFTER MAKE MOVES---------\n");
-// 		ft_printf("MOVES\n");
-// 		print_str_list(moves);
-// 		ft_printf("STACK A\n");
-// 		print_int_list(lst_a);
-// 		ft_printf("STACK B\n");
-// 		print_int_list(lst_b);
-// 		//otherwse start the sorting?
+// 		// ft_printf("TO RECOMBINE!\n");
+// 		// ft_printf("\nSTACK A\n");//
+// 		// print_int_list(*lst_a);//
+// 		// ft_printf("STACK B\n");//
+// 		// print_int_list(*lst_b);//
+// 		recombine(moves, lst_a, lst_b);
+// 		return ;
 // 	}
-// 	//free other lists before return?
-// 	// ft_lstclear(&lst_a, &del_int_content);
-// 	// ft_lstclear(&lst_b, &del_int_content);
-// 	return (moves);
+// 	if (ab_len[0] > 1 && *((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
+// 	{
+// 		check_swaps_a(moves, lst_a, lst_b, ab_len);
+// 		make_moves(moves, lst_a, lst_b);
+// 	}
+// 	else if (ab_len[1] > 1 && *((int *)(*lst_b)->data) < *((int *)(*lst_b)->next->data)) //only b needs to move
+// 	{
+// 		check_swaps_b(moves, lst_a, lst_b, ab_len);
+// 		make_moves(moves, lst_a, lst_b);
+// 	}
+// 	else //push to b or recombine
+// 	{
+// 		add_move(moves, pb(lst_b, lst_a));
+// 		make_moves(moves, lst_a, lst_b);
+// 	}
 // }
-
-	// ft_printf("\nSTACK A\n");//
-	// print_int_list(*lst_a);//
-	// ft_printf("STACK B\n");//
-	// print_int_list(*lst_b);//
-	// ft_printf("len of b: %i\n", ab_len[1]);
-
-// ft_printf("\ngo to recombine STACK A\n");//
-// print_int_list(*lst_a);//
-// ft_printf("go to recombine STACK B\n");//
-// print_int_list(*lst_b);//
-
-// ft_printf("at begiing of make moves STACK A\n");//
-// 		print_int_list(*lst_a);//
-// 		ft_printf(" before recombine STACK B\n");//
-// 		print_int_list(*lst_b);//
