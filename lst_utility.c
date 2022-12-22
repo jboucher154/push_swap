@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:00:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/20 12:06:44 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/22 12:45:24 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_str_list(t_list *head)
 	temp = head;
 	while (temp)
 	{
-		ft_printf("move: %s\n", temp->data);
+		ft_printf("%s\n", temp->data);
 		temp = temp->next;
 	}
 }
