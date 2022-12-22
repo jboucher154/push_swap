@@ -6,11 +6,12 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:31:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/20 18:33:18 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:15:54 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <assert.h>//
 
 int	main(int argc, char **argv)
 {
@@ -25,9 +26,14 @@ int	main(int argc, char **argv)
 	else
 	{
 		// ft_printf("\nbefore moves\n");//
+		// print_int_list(head);
 		moves = sort_list(&head);
-		// if (moves)
-		// 	print_str_list(moves);
+		// print_str_list(moves);
+
+		// ft_printf("\nsanitized\n");
+		print_sanitized_moves(&moves);
+		// print_str_list(moves);
+		
 		ft_printf("\nAFTER SORT\n");
 		print_int_list(head);
 		ft_lstclear(&head, &del_int_content);
@@ -36,9 +42,9 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-//this is breaking my code....
-// 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 2 1 1 
-// 890 4 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 1 6 567
-// 890 34567 891 1 6 567 // remove any one of these and it works...
-//but not this
-// 890 4 1 3 2 5 4 3 90 1 7 34 42 12 34567 891 1 6
+//this does not work with the checker...
+// 4 67 3 87 23 6 1 90 432 6543123 341 2 1
+// commands not printing properly/////
+// but the following does 
+// 4 67 3 87 23 6 1 90 432 6543123 341 2 10
+// 4 67 3 87 23 6 1 90 432 6543123 341 2
