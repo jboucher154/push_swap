@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/21 11:55:53 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/21 15:45:57 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 t_list	*read_inputs(int argc, char **argv);
 t_list	*sort_list(t_list **lst_a);
+
+void	sanitize_moves(t_list **moves);
+void	print_sanitized_moves(t_list **moves);
 
 //sorting utility
 void	add_move(t_list **moves, char *move);
