@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		// print_str_list(moves);
 
 		// ft_printf("\nsanitized\n");
-		print_sanitized_moves(&moves);
+		// print_sanitized_moves(&moves);
 		// print_str_list(moves);
 		
 		ft_printf("\nAFTER SORT\n");

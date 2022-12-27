@@ -18,18 +18,23 @@ void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *a
 void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, int rot_count)
 {
 	int	ab_len[2];
-		// ft_printf("\nUNROTATED PLACEMENT\n");
-	ab_len[0] = ft_lstsize(*lst_a);
-	ab_len[1] = ft_lstsize(*lst_b);
-
+	t_list	*last;
+	ft_printf("\nUNROTATED PLACEMENT\n");
+		ft_printf("\nSTACK A\n");//
+		print_int_list(*lst_a);//
+		ft_printf("STACK B\n");//
+		print_int_list(*lst_b);//
 	while (rot_count)
 	{
+		last = ft_lstlast(*lst_a);
 		if (*((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
 		{
+			ft_printf("\nNeed A swap\n");
 			check_swaps_a(moves, lst_a, lst_b, ab_len);
 		}
-		else if (ab_len[1] > 1) //only b needs to move
+		else if (*lst_b && (*lst_b)->next != NULL) //only b needs to move
 		{
+			ft_printf("\nNeed B swap\n");
 			if ((*lst_b)->next && *((int *)(*lst_b)->data) < *((int *)(*lst_b)->next->data))
 				add_move(moves, sb(lst_b));
 		}
@@ -37,6 +42,11 @@ void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, i
 		rot_count--;
 		ab_len[0] = ft_lstsize(*lst_a);
 		ab_len[1] = ft_lstsize(*lst_b);
+		if ((*(int *)last->data) > *((int *)(*lst_b)->data)) //added
+		{
+			add_move(moves, rra(lst_a));//added
+			rot_count--;
+		}
 		if (lst_b && *lst_b)
 			check_next_placement(moves, lst_a, lst_b, ab_len);
 	}
@@ -45,7 +55,7 @@ void	check_unrotate_placements(t_list **moves, t_list **lst_a, t_list **lst_b, i
 void	needs_rotation(t_list **moves, t_list **lst_a, t_list **lst_b)
 {
 	int	rot_count;
-	// ft_printf("\nNEEDS ROTATION\n");
+	ft_printf("\nNEEDS ROTATION\n");
 	rot_count = 0;
 	while ((!(*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->data)) || \
 	 !(*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->next->data))))
@@ -60,13 +70,13 @@ void	needs_rotation(t_list **moves, t_list **lst_a, t_list **lst_b)
 
 void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len) //remove int param
 {
-	// ft_printf("TOP OF CHECK NEXT PLACEMENT!\n");
-	// ft_printf("\nSTACK A\n");//
-	// print_int_list(*lst_a);//
-	// ft_printf("STACK B\n");//
-	// print_int_list(*lst_b);//
 	if (!lst_b || !(*lst_b))
 		return ;
+	ft_printf("TOP OF CHECK NEXT PLACEMENT!\n");
+	ft_printf("\nSTACK A\n");//
+	print_int_list(*lst_a);//
+	ft_printf("STACK B\n");//
+	print_int_list(*lst_b);//
 	if (*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->data)) //if it fits on top OKAY
 		add_move(moves, pa(lst_a, lst_b));
 	else if (*((int *)(*lst_b)->data) <= *((int *)(*lst_a)->next->data)) //if it fits between top and next OKAY
@@ -78,22 +88,28 @@ void	check_next_placement(t_list **moves, t_list **lst_a, t_list **lst_b, int *a
 void	recombine(t_list **moves, t_list **lst_a, t_list **lst_b)
 {
 	int	ab_len[2];
-	
+
+	// ft_printf("\nTOP of recombine\n");//
+	// ft_printf("\nSTACK A\n");//
+	// print_int_list(*lst_a);//
+	// ft_printf("STACK B\n");//
+	// print_int_list(*lst_b);//
 	ab_len[0] = ft_lstsize(*lst_a);
 	ab_len[1] = ft_lstsize(*lst_b);
 	if (*((int *)(*lst_a)->data) > *((int *)(*lst_a)->next->data)) //a need to move, check if b needs too
 	{
+		// ft_printf("\nA NEEDS SWAP\n");//
 		check_swaps_a(moves, lst_a, lst_b, ab_len);
 		recombine(moves, lst_a, lst_b);
 	}
 	else if (ab_len[1] > 1 && *((int *)(*lst_b)->data) < *((int *)(*lst_b)->next->data)) //only b needs to move
 	{
+		// ft_printf("\nB NEEDS SWAP\n");//
 		add_move(moves, sb(lst_b));
 		recombine(moves, lst_a, lst_b);
 	}
 	else if (ab_len[1] > 0) //push to a
 	{
-		// ft_printf("\nto check next placement\n");//
 		check_next_placement(moves, lst_a, lst_b, ab_len);
 		recombine(moves, lst_a, lst_b);
 	}
@@ -109,11 +125,11 @@ void	make_moves(t_list **moves, t_list **lst_a, t_list **lst_b)
 	ab_len[1] = ft_lstsize(*lst_b);
 	if ((*lst_a)->next->next == NULL) //is len 2
 	{
-		// ft_printf("TO RECOMBINE!\n");
-		// ft_printf("\nSTACK A\n");//
-		// print_int_list(*lst_a);//
-		// ft_printf("STACK B\n");//
-		// print_int_list(*lst_b);//
+		ft_printf("TO RECOMBINE!\n");
+		ft_printf("\nSTACK A\n");//
+		print_int_list(*lst_a);//
+		ft_printf("STACK B\n");//
+		print_int_list(*lst_b);//
 		recombine(moves, lst_a, lst_b);
 		return ;
 	}
