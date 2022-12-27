@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/21 15:45:57 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:17:36 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void	print_sanitized_moves(t_list **moves);
 
 //sorting utility
 void	add_move(t_list **moves, char *move);
-void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
-void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
+// void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
+void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b);
+// void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
+void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b);
+
+// new sorting stuffs
+int		find_mean(t_list *lst, int len);
+void	conquer(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_sizes);
 
 //moves
 char	*sa(t_list **head); 
@@ -51,6 +57,7 @@ void	print_str_list(t_list *head);
 
 //checking utiility
 int		check_if_sorted(t_list *head);
-int		check_if_revsorted(t_list *head);
+// int		check_if_revsorted(t_list *head);
+int	check_if_revsorted(t_list *head, int len);
 
 #endif
