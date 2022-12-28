@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:55:27 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/27 17:37:40 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:26:31 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	find_mean(t_list *lst, int len)
 {
 	int c;
-	int	sum;
+	long int	sum;
 	t_list	*temp;
 
 	c = 0;
@@ -30,9 +30,9 @@ int	find_mean(t_list *lst, int len)
 		temp = temp->next;
 		c++;
 	}
-	ft_printf("SUM: %i ", sum );
-	ft_printf("LEN : %i ", len);
-	ft_printf("MEAN : %i \n", sum / len);
+	// ft_printf("SUM: %i ", sum );
+	// ft_printf("LEN : %i ", len);
+	// ft_printf("MEAN : %i \n", sum / len);
 	return (sum / len);
 }
 
@@ -41,10 +41,10 @@ int	partition(t_list **moves, t_list **lst_a, t_list **lst_b)
 	int len;
 	int	size;
 	int	pivot;
+	// int	remaining;
 
 	len = ft_lstsize(*lst_a);
 	size = 0;
-
 	// ft_printf("\ntop of PARTITION\n");
 	// ft_printf("\nSTACK A\n");//
 	// print_int_list(*lst_a);//
@@ -56,8 +56,8 @@ int	partition(t_list **moves, t_list **lst_a, t_list **lst_b)
 	if (len == 2) //causing floating point...
 		return (size);
 	pivot = find_mean(*lst_a, len);
-	ft_printf("PIVOT : %i\n", pivot);//
-	while (len > 2) //changed to > 2
+	// ft_printf("PIVOT : %i\n", pivot);//
+	while (len) //changed to > 2 took it away now.
 	{
 		if (*(int *)(*lst_a)->data < pivot)
 		{
@@ -95,7 +95,7 @@ t_list	*sort_list(t_list **lst_a)
 	t_list	*lst_b;
 	t_list	*moves;
 	t_list	*part_sizes;
-	t_list	*new;
+	// t_list	*new;
 
 	lst_b = NULL;
 	moves = NULL;
@@ -114,29 +114,32 @@ t_list	*sort_list(t_list **lst_a)
 			else
 				add_move(&moves, sa(lst_a));
 		}
-		ft_printf("\nafter divide\n");
-		ft_printf("\nSTACK A\n");//
-		print_int_list(*lst_a);//
-		ft_printf("STACK B\n");//
-		print_int_list(lst_b);//
-		ft_printf("moves\n");//
-		print_str_list(moves);//
-		ft_printf("PARTION SIZES\n");//
-		print_int_list(part_sizes);//
+		// ft_printf("\nafter divide\n");
+		// ft_printf("\nSTACK A\n");//
+		// print_int_list(*lst_a);//
+		// ft_printf("STACK B\n");//
+		// print_int_list(lst_b);//
+		// ft_printf("moves\n");//
+		// print_str_list(moves);//
+		// ft_printf("PARTION SIZES\n");//
+		// print_int_list(part_sizes);//
 
 		conquer(&moves, lst_a, &lst_b, &part_sizes);
 
-		ft_printf("\nafter conquer\n");
-		ft_printf("\nSTACK A\n");//
-		print_int_list(*lst_a);//
-		ft_printf("STACK B\n");//
-		print_int_list(lst_b);//
-		ft_printf("moves\n");//
-		print_str_list(moves);//
-		ft_printf("PARTION SIZES\n");//
-		print_int_list(part_sizes);//
+		// ft_printf("\nafter conquer\n");
+		// ft_printf("\nSTACK A\n");//
+		// print_int_list(*lst_a);//
+		// ft_printf("STACK B\n");//
+		// print_int_list(lst_b);//
+		// ft_printf("moves\n");//
+		// print_str_list(moves);//
+		// ft_printf("PARTION SIZES\n");//
+		// print_int_list(part_sizes);//
 	}
-	// ft_lstclear(&part_sizes, &del_int_content);
+	// if (part_sizes)
+	// 	ft_lstclear(&part_sizes, &del_int_content);
+	// if (lst_b)
+	// 	ft_lstclear(&lst_b, &del_int_content);
 	return (moves);
 }
 
