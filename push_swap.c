@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:31:21 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/22 17:15:54 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:23:56 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,24 @@ int	main(int argc, char **argv)
 	if (argc > 1)
 		head = read_inputs(argc, argv);
 	if (head == NULL)
-		ft_printf("Error\n");
+		ft_putendl_fd("Error\n", 2);
 	else
 	{
 		// ft_printf("\nbefore moves\n");//
 		// print_int_list(head);
 		moves = sort_list(&head);
-		// print_str_list(moves);
+		print_str_list(moves);
 
-		// ft_printf("\nsanitized\n");
-		// print_sanitized_moves(&moves);
-		// print_str_list(moves);
+		// if (check_if_sorted(head))
+		// 	ft_printf("SORTED!\n");
+		// else
+		// 	ft_printf("NOT SORTED!\n");
+		// // ft_printf("\nsanitized\n");
+		// // print_sanitized_moves(&moves);
+		// // print_str_list(moves);
 		
-		ft_printf("\nAFTER SORT\n");
-		print_int_list(head);
+		// ft_printf("\nAFTER SORT\n");
+		// print_int_list(head);
 		ft_lstclear(&head, &del_int_content);
 		ft_lstclear(&moves, &del_str_content);
 	}
