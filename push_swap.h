@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/27 17:17:36 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:33:58 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void	sanitize_moves(t_list **moves);
 void	print_sanitized_moves(t_list **moves);
 
 //sorting utility
-void	add_move(t_list **moves, char *move);
+int	add_move(t_list **moves, char *move);
 // void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
-void	check_swaps_a(t_list **moves, t_list **lst_a, t_list **lst_b);
+void	check_swaps_a(t_list **moves, t_list **lst_a);
 // void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b, int *ab_len);
-void	check_swaps_b(t_list **moves, t_list **lst_a, t_list **lst_b);
+void	check_swaps_b(t_list **moves, t_list **lst_b);
 
 // new sorting stuffs
 int		find_mean(t_list *lst, int len);
 void	conquer(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_sizes);
+int		push_to_a(t_list **moves, t_list **lst_a, t_list **lst_b);
+
 
 //moves
 char	*sa(t_list **head); 
