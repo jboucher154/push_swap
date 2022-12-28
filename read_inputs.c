@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:58:36 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/22 17:12:02 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:32:12 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_int(char *to_check)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if ((to_check[0] == '-' || to_check[0] == '+')&& ft_isdigit(to_check[1]))
