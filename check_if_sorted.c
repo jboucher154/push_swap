@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:38:58 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/27 17:13:09 by jebouche         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:21:58 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	check_if_sorted(t_list *head)
 	int		len;
 	t_list	*temp;
 
-	// ft_printf("length : %i\n", len);
 	if (!head)
 		return (0);
 	temp = head;
@@ -27,7 +26,6 @@ int	check_if_sorted(t_list *head)
 		len--;
 		temp = temp->next;
 	}
-	// ft_printf("length after check : %i\n", len);
 	if (len == 1)
 		return (1);
 	return (0);
@@ -35,10 +33,8 @@ int	check_if_sorted(t_list *head)
 
 int	check_if_revsorted(t_list *head, int len)
 {
-	// int		len;
 	t_list	*temp;
 	
-	// ft_printf("length : %i\n", len);
 	if (!head)
 		return (0);
 	temp = head;
@@ -47,7 +43,6 @@ int	check_if_revsorted(t_list *head, int len)
 		len--;
 		temp = temp->next;
 	}
-	// ft_printf("length after check : %i\n", len);
 	if (len == 1)
 		return (1);
 	return (0);
