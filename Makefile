@@ -6,7 +6,7 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 11:09:41 by jebouche          #+#    #+#              #
-#    Updated: 2022/12/28 17:01:11 by jebouche         ###   ########.fr        #
+#    Updated: 2023/01/03 18:33:48 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,22 @@ HOME_FLAGS = -g
 
 DEPS = push_swap.h
 
-SRCS = push_swap.c sort.c sorting_utility.c lst_utility.c lst_pop.c \
-		check_if_sorted.c conquer.c push.c read_inputs.c reverse_rotate.c \
-		rotate.c swap.c
+SRCS = main.c \
+		conquer.c \
+		divide.c \
+		lst_pop.c \
+		push.c \
+		read_inputs.c \
+		reverse_rotate.c \
+		rotate.c \
+		sanitize_moves.c \
+		sanitize_moves2.c \
+		sort.c \
+		swap.c \
+		utility_one.c \
+		utility_two.c \
+		utility_three.c \
+		utility_four.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,10 +46,10 @@ DEBUG = -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(HOME_FLAGS) -o $(NAME) $(OBJS) $(LIB)
+	$(CC) $(HOME_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
 
 %.o:%.c $(DEPS)
-	$(CC) $(HOME_FLAGS) -c $< -o $@
+	$(CC) $(HOME_FLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
