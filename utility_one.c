@@ -1,35 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   lst_utility.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 11:57:55 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 15:10:09 by jebouche         ###   ########.fr       */
+/*   Created: 2022/12/13 12:00:21 by jebouche          #+#    #+#             */
+/*   Updated: 2023/01/03 18:11:30 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	*pa(t_list **head_a, t_list **head_b)
+int	*make_int_content(int num)
 {
-	t_list	*popped;
+	int	*ptr;
 
-	if (!head_a || !head_b || !(*head_b))
-		return (NULL);
-	popped = lst_pop(head_b);
-	ft_lstadd_front(head_a, popped);
-	return ("pa");
+	ptr = (int *) malloc(sizeof(int));
+	*ptr = num;
+	return (ptr);
 }
 
-char	*pb(t_list **head_b, t_list **head_a)
+void	del_int_content(void *data)
 {
-	t_list	*popped;
+	free(data);
+	data = NULL;
+}
 
-	if (!head_b || !head_a || !(*head_a))
-		return (NULL);
-	popped = lst_pop(head_a);
-	ft_lstadd_front(head_b, popped);
-	return ("pb");
+void	del_str_content(void *data)
+{
+	data = NULL;
+}
+
+void	free_array(char **to_free)
+{
+	int	i;
+
+	i = 0;
+	while (to_free[i])
+	{
+		free(to_free[i]);
+		i++;
+	}
+	free(to_free);
 }

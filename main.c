@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 11:57:55 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 15:10:09 by jebouche         ###   ########.fr       */
+/*   Created: 2022/12/09 15:31:21 by jebouche          #+#    #+#             */
+/*   Updated: 2023/01/03 15:04:07 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-char	*pa(t_list **head_a, t_list **head_b)
+int	main(int argc, char **argv)
 {
-	t_list	*popped;
+	t_list	*head;
+	t_list	*moves;
 
-	if (!head_a || !head_b || !(*head_b))
-		return (NULL);
-	popped = lst_pop(head_b);
-	ft_lstadd_front(head_a, popped);
-	return ("pa");
-}
-
-char	*pb(t_list **head_b, t_list **head_a)
-{
-	t_list	*popped;
-
-	if (!head_b || !head_a || !(*head_a))
-		return (NULL);
-	popped = lst_pop(head_a);
-	ft_lstadd_front(head_b, popped);
-	return ("pb");
+	head = NULL;
+	if (argc > 1)
+		read_inputs(&head, argc, argv);
+	if (head == NULL)
+		ft_putendl_fd("Error", 2);
+	else
+	{
+		moves = sort_list(&head);
+		// print_str_list(moves);
+		sanitize_moves(&moves);
+		print_sanitized(moves);
+		ft_lstclear(&head, &del_int_content);
+		ft_lstclear(&moves, &del_str_content);
+	}
+	return (0);
 }

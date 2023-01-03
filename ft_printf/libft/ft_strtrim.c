@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:49:36 by jebouche          #+#    #+#             */
-/*   Updated: 2022/11/22 11:47:14 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/03 10:30:01 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ char	*ft_strtrim(const char *s1, const char *set)
 	int		start;
 	int		end;
 	char	*trimmed;
-	int		i;
 
 	if (!s1 || !set)
 		return (NULL);
-	i = 0;
 	start = get_start(s1, set);
 	end = get_end(s1, set) + 1;
 	if (end - start == 0)

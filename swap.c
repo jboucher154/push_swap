@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:31:46 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/16 12:18:24 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:53:10 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 char	*sa(t_list **head)
 {
 	int	*temp;
+
 	if (!head)
 		return (NULL);
 	if (head && (*head)->next)
 	{
-		temp = (int *) (*head)->data;
+		temp = (int *)(*head)->data;
 		(*head)->data = (*head)->next->data;
 		(*head)->next->data = temp;
 	}
@@ -35,7 +36,7 @@ char	*sb(t_list **head)
 		return (NULL);
 	if (head && (*head)->next)
 	{
-		temp = (int *) (*head)->data;
+		temp = (int *)(*head)->data;
 		(*head)->data = (*head)->next->data;
 		(*head)->next->data = temp;
 	}

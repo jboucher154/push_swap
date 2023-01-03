@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 11:58:36 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:12 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:08:34 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_int(char *to_check)
 	size_t	i;
 
 	i = 0;
-	if ((to_check[0] == '-' || to_check[0] == '+')&& ft_isdigit(to_check[1]))
+	if ((to_check[0] == '-' || to_check[0] == '+') && ft_isdigit(to_check[1]))
 		i++;
 	while (to_check[i] && ft_isdigit(to_check[i]))
 		i++;
@@ -51,8 +51,13 @@ static int	check_dups(t_list	**stack)
 	return (1);
 }
 
-static int	check_num(int num, char *str)
-{
+static int	validate_num(char *str)
+{	
+	int	num;
+
+	if (!is_int(str))
+		return (0);
+	num = ft_atoi(str);
 	if (num < 0 && str[0] != '-')
 		return (0);
 	else if (num >= 0 && str[0] == '-')
@@ -74,11 +79,9 @@ static int	generate_stack(char **strs, t_list **head, int arg_str)
 	num = 0;
 	while (strs[i])
 	{
-		if (!is_int(strs[i]))
+		if (!validate_num(strs[i]))
 			return (0);
 		num = ft_atoi(strs[i]);
-		if (!check_num(num, strs[i]))
-			return (0);
 		new = ft_lstnew(make_int_content(num));
 		if (!new)
 			return (0);
@@ -88,19 +91,6 @@ static int	generate_stack(char **strs, t_list **head, int arg_str)
 	if (!check_dups(head))
 		return (0);
 	return (1);
-}
-
-void	free_array(char **to_free)
-{
-	int	i;
-
-	i = 0;
-	while (to_free[i])
-	{
-		free(to_free[i]);
-		i++;
-	}
-	free(to_free);
 }
 
 void	read_inputs(t_list **head, int argc, char **argv)
@@ -128,32 +118,3 @@ void	read_inputs(t_list **head, int argc, char **argv)
 		head = NULL;
 	}
 }
-
-
-// static int	check_errors(t_list	**stack)
-// {
-// 	t_list	*temp1;
-// 	t_list	*temp2;
-// 	int		to_check;
-
-// 	if (!stack)
-// 		return (0);
-// 	temp1 = *stack;
-// 	temp2 = (*stack)->next;
-// 	while (temp1 && temp2)
-// 	{
-// 		to_check = *(int *)temp1->data;
-// 		while (temp2)
-// 		{
-// 			if (to_check == *(int *)temp2->data)
-// 				return (0);
-// 			else if (to_check > INT_MAX || to_check < INT_MIN || \
-// 				*(int *)temp2->data > INT_MAX || *(int *)temp2->data > INT_MIN)
-// 				return (0);
-// 			temp2 = temp2->next;
-// 		}
-// 		temp1 = temp1->next;
-// 		temp2 = temp1->next;
-// 	}
-// 	return (1);
-// }

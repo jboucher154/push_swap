@@ -6,130 +6,76 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 12:04:57 by jebouche          #+#    #+#             */
-/*   Updated: 2022/12/21 15:17:04 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:01:50 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	remove_both(t_list **temp)
+static t_list	*get_compared(t_list *temp)
 {
-	t_list	*popped;
+	t_list	*to_compare;
 
-	ft_printf("remove both\n");//
-	print_str_list(*temp);	
-	if (!temp || !(*temp))
-		return (0);
-	if (!(*temp)->next->next)
+	to_compare = temp->next;
+	if (to_compare && !ft_strncmp((to_compare)->data, "x", 1))
 	{
-		*temp = NULL;
-		return (-10);
+		while (to_compare && !ft_strncmp(to_compare->data, "x", 1))
+			to_compare = to_compare->next;
 	}
-	else
-	{
-		popped = lst_pop(temp);
-		ft_printf("POPPED: %s\n", popped->data);//
-		ft_lstdelone(popped, &del_str_content);
-		popped = lst_pop(temp);
-		ft_printf("POPPED: %s\nTEMP LIST:\n", popped->data);//
-		ft_lstdelone(popped, &del_str_content);
-		print_str_list(*temp);
-		return (1);
-	}
+	return (to_compare);
 }
 
-int	remove_one(t_list **temp, char *replace_with)
+static int	check_extra_moves(t_list **moves)
 {
-	t_list	*to_pop;
-	ft_printf("remove one\n");
-	t_list	*popped;
+	t_list	*temp;
+	t_list	*to_compare;
+	int		moved;
 
-	if (!temp || !*temp)
-		return (0);
-	to_pop = (*temp)->next;
-	popped = lst_pop(&to_pop);
-	ft_lstdelone(popped, &del_str_content);
-	(*temp)->data = replace_with;
-	return (1);
-}
-
-int	check_double_removal(t_list **temp_moves, char *current, char *next)
-{
-	int	moved;
-	ft_printf("dbl removal\n");//
+	temp = *moves;
 	moved = 0;
-	if (!ft_strncmp(current, "pa", 2))
+	while (temp && temp->next)
 	{
-		if (!ft_strncmp(next, "pb", 2))
-			moved = remove_both(temp_moves);
-	}
-	else if (!ft_strncmp(current, "pb", 2))
-	{
-		if (!ft_strncmp(next, "pa", 2))
-			moved = remove_both(temp_moves);
-	}
-	else if (!ft_strncmp(current, "ra", 2))
-	{
-		if (!ft_strncmp(next, "rra", 3))
-			moved = remove_both(temp_moves);
-	}
-	else if (!ft_strncmp(current, "rb", 2))
-	{
-		if (!ft_strncmp(next, "rrb", 3))
-			moved = remove_both(temp_moves);
-	}
-	return (moved);
-}
-
-int	check_single_removal(t_list **temp_moves, char *current, char *next)
-{
-	int	moved;
-
-	moved = 0;
-	if (!ft_strncmp(current, "rr", 2))
-	{
-		if (!ft_strncmp(next, "rra", 3))
-			moved = remove_one(temp_moves, "rb");
-		else if (!ft_strncmp(next, "rrb", 3))
-			moved = remove_one(temp_moves, "ra");
-	}
-	else if (!ft_strncmp(current, "rrr", 3))
-	{
-		if (!ft_strncmp(next, "ra", 2))
-			moved = remove_one(temp_moves, "rrb");
-		else if (!ft_strncmp(next, "rb", 2))
-			moved = remove_one(temp_moves, "rra");
+		if (!ft_strncmp(temp->data, "x", 1))
+		{
+			while (temp && !ft_strncmp(temp->data, "x", 1))
+				temp = temp->next;
+		}
+		if (!temp)
+			break ;
+		to_compare = get_compared(temp);
+		if (!temp || !to_compare)
+			break ;
+		moved += check_double_removal(&temp, &to_compare);
+		temp = temp->next;
 	}
 	return (moved);
 }
 
 void	sanitize_moves(t_list **moves)
 {
-	t_list *temp_moves;
-	char	*current;
-	char	*next;
 	int		moved;
 
 	if (!moves || !*moves)
 		return ;
-	temp_moves = *moves;
-	while (temp_moves && temp_moves->next)
+	moved = 1;
+	while (moved)
 	{
-		ft_printf("\nMOVES at begin of sanitaize loop:\n");//
-		print_str_list(*moves);
-		ft_printf("\ntemp at begin of sanitaize loop:\n%s\n", temp_moves->data);//
-		moved = 0;
-		current = temp_moves->data;
-		next = temp_moves->next->data;
-		moved  = check_double_removal(&temp_moves, current, next);
-		if (moved == 0)
-			moved = check_single_removal(&temp_moves, current, next);
-		if (moved == 0)
-			temp_moves = temp_moves->next;
-		if (temp_moves == NULL && moved < 0)
-		{
-			ft_lstclear(moves, &del_str_content);
-			return ;
-		}
+		moved = check_extra_moves(moves);
+	}
+}
+
+void	print_sanitized(t_list *head)
+{
+	t_list	*temp;
+
+	temp = head;
+	while (temp)
+	{
+		while (temp && !ft_strncmp(temp->data, "x", 1))
+			temp = temp->next;
+		if (!temp)
+			break ;
+		ft_printf("%s\n", temp->data);
+		temp = temp->next;
 	}
 }
