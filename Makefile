@@ -18,6 +18,8 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -g
 
+HOME_FLAGS = -g
+
 DEPS = push_swap.h
 
 SRCS = push_swap.c sort.c sorting_utility.c lst_utility.c lst_pop.c \
@@ -31,10 +33,10 @@ DEBUG = -fsanitize=address
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
+	$(CC) $(HOME_FLAGS) -o $(NAME) $(OBJS) $(LIB)
 
 %.o:%.c $(DEPS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(HOME_FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -20,9 +20,9 @@ int	main(int argc, char **argv)
 
 	head = NULL;
 	if (argc > 1)
-		head = read_inputs(argc, argv);
+		read_inputs(&head, argc, argv);
 	if (head == NULL)
-		ft_putendl_fd("Error\n", 2);
+		ft_putendl_fd("Error", 2);
 	else
 	{
 		// ft_printf("\nbefore moves\n");//
@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 		// 	ft_printf("SORTED!\n");
 		// else
 		// 	ft_printf("NOT SORTED!\n");
-		// // ft_printf("\nsanitized\n");
-		// // print_sanitized_moves(&moves);
+		// ft_printf("\nsanitized\n");
+		// print_sanitized_moves(&moves);
 		// // print_str_list(moves);
 		
 		// ft_printf("\nAFTER SORT\n");

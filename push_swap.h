@@ -17,7 +17,7 @@
 # include "ft_printf/ft_printf.h"
 
 
-t_list	*read_inputs(int argc, char **argv);
+void	read_inputs(t_list **head, int argc, char **argv);
 t_list	*sort_list(t_list **lst_a);
 
 void	sanitize_moves(t_list **moves);
@@ -34,6 +34,9 @@ void	check_swaps_b(t_list **moves, t_list **lst_b);
 int		find_mean(t_list *lst, int len);
 void	conquer(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_sizes);
 int		push_to_a(t_list **moves, t_list **lst_a, t_list **lst_b);
+int	more_to_move(t_list **lst_a, int pivot, int len);
+void	rotate_a(t_list **moves, t_list **lst_a, int rotation);
+void	rev_rotate_a(t_list **moves, t_list **lst_a, int rotation);
 
 
 //moves

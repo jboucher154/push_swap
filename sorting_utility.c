@@ -39,13 +39,20 @@ void	check_swaps_b(t_list **moves, t_list **lst_b)
 			add_move(moves, sb(lst_b));
 }
 
-void	unrotate_a(t_list **moves, t_list **lst_a, int rotation)
+void	rev_rotate_a(t_list **moves, t_list **lst_a, int rotation)
 {
 	while (rotation)
 		rotation -= add_move(moves, rra(lst_a));
 }
 
-int	rotate_a(t_list **moves, t_list **lst_a, int to_add)
+void	rotate_a(t_list **moves, t_list **lst_a, int rotation)
+{
+	while (rotation)
+		rotation -= add_move(moves, ra(lst_a));
+
+}
+
+int	rotate_a_toadd(t_list **moves, t_list **lst_a, int to_add)
 {
 	int	rotated;
 
@@ -71,9 +78,9 @@ int	push_to_a(t_list **moves, t_list **lst_a, t_list **lst_b)
 	}
 	else
 	{
-		rotated = rotate_a(moves, lst_a, to_add);
+		rotated = rotate_a_toadd(moves, lst_a, to_add);
 		pushed = push_to_a(moves, lst_a, lst_b);
-		unrotate_a(moves, lst_a, rotated);
+		rev_rotate_a(moves, lst_a, rotated);
 	}
 	return (pushed);
 }

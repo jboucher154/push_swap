@@ -59,6 +59,8 @@ void	send_higher_values(t_list **moves, t_list **lst_a, t_list **lst_b, int part
 				add_move(moves, sb(lst_b)); //
 			sent += push_to_a(moves, lst_a, lst_b);
 		}
+		else if (!more_to_move(lst_b, pivot, (part_size - evaled)))
+			break ;
 		else
 			rotation += add_move(moves, rb(lst_b));
 		evaled++;
@@ -90,12 +92,14 @@ void	handle_partition(t_list **moves, t_list **lst_a, t_list **lst_b, int part_s
 
 void	conquer(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_sizes)
 {
-	t_list *popped;
+	// t_list *popped;
+	t_list	*temp_part;
 	int		size;
-		
-	while (part_sizes && *part_sizes)
+	
+	temp_part = *part_sizes;
+	while (temp_part)
 	{
-		size = *(int *)(*part_sizes)->data;
+		size = *(int *)temp_part->data;
 		if (size == 1 || check_if_revsorted(*lst_b, size))
 		{
 			// ft_printf("I'M ALLREADY SORTED\n");//
@@ -108,11 +112,10 @@ void	conquer(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_sizes
 		}
 		else
 			handle_partition(moves, lst_a, lst_b, size);
-		popped = lst_pop(part_sizes);
-		free(popped);
+		temp_part = temp_part->next;
+		// popped = lst_pop(part_sizes);
+		// free(popped);
 	}
-	if (part_sizes)
-		ft_lstclear(part_sizes, &del_int_content);
 }
 
 		// ft_printf("\nTOP OF CONQUER\n");

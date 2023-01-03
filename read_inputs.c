@@ -55,7 +55,7 @@ static int	check_num(int num, char *str)
 {
 	if (num < 0 && str[0] != '-')
 		return (0);
-	else if (num > 0 && str[0] == '-')
+	else if (num >= 0 && str[0] == '-')
 		return (0);
 	return (1);
 }
@@ -90,27 +90,43 @@ static int	generate_stack(char **strs, t_list **head, int arg_str)
 	return (1);
 }
 
-t_list	*read_inputs(int argc, char **argv)
+void	free_array(char **to_free)
 {
-	t_list	*head;
+	int	i;
+
+	i = 0;
+	while (to_free[i])
+	{
+		free(to_free[i]);
+		i++;
+	}
+	free(to_free);
+}
+
+void	read_inputs(t_list **head, int argc, char **argv)
+{
 	char	**arr;
 	int		gen_result;
 
-	head = NULL;
 	gen_result = 0;
 	if (argc == 2 && ft_strchr(argv[1], ' '))
 	{
 		arr = ft_split(argv[1], ' ');
-		gen_result = generate_stack(arr, &head, 1);
+		if (arr)
+		{
+			gen_result = generate_stack(arr, head, 1);
+			free_array(arr);
+		}
+		else
+			gen_result = 0;
 	}
 	else
-		gen_result = generate_stack(argv, &head, 0);
+		gen_result = generate_stack(argv, head, 0);
 	if (gen_result == 0)
 	{
-		ft_lstclear(&head, &del_int_content);
+		ft_lstclear(head, &del_int_content);
 		head = NULL;
 	}
-	return (head);
 }
 
 
