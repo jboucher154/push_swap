@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:40:37 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 16:53:34 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:52:00 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	check_double_removal(t_list **move, t_list **to_compare)
 		moved = check_pa_pb(move, to_compare);
 	}
 	else if (!ft_strncmp((*move)->data, "ra", 2) || \
-		!ft_strncmp((*to_compare)->data, "rra", 3) || \
-		!ft_strncmp((*to_compare)->data, "rrb", 3) || \
-		!ft_strncmp((*to_compare)->data, "rb", 3))
+		!ft_strncmp((*move)->data, "rra", 3) || \
+		!ft_strncmp((*move)->data, "rrb", 3) || \
+		!ft_strncmp((*move)->data, "rb", 3))
 	{
 		moved = check_ra_rra_rb_rrb(move, to_compare);
 	}
