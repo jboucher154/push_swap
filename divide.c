@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:06:26 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 18:08:40 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:35:41 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	find_next_move(t_list **moves, t_list **lst_a, int pivot)
 	}
 	if (temp == NULL)
 		return (0);
-	else if (location <= len / 2)
+	else if (location <= len / 2 || (len % 2 != 0 && location <= (len + 1) / 2))
 		return (rotate_a(moves, lst_a, location - 1));
 	else
 		return (rev_rotate_a(moves, lst_a, len - location + 1));
@@ -76,7 +76,13 @@ void	divide(t_list **moves, t_list **lst_a, t_list **lst_b, t_list **part_ss)
 			break ;
 		new = ft_lstnew(make_int_content(size));
 		if (!new)
-			break ; //print error and exit
+		{
+			ft_lstclear(lst_a, &del_int_content);
+			ft_lstclear(lst_b, &del_int_content);
+			ft_lstclear(moves, &del_str_content);
+			ft_lstclear(part_ss, &del_int_content);
+			error();
+		}
 		ft_lstadd_front(part_ss, new);
 	}
 }
