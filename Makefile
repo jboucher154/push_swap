@@ -6,7 +6,7 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 11:09:41 by jebouche          #+#    #+#              #
-#    Updated: 2023/01/04 15:15:57 by jebouche         ###   ########.fr        #
+#    Updated: 2023/01/04 16:40:29 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS = main.c \
 		utility_two.c \
 		utility_three.c \
 		utility_four.c \
-		extras.c 
 		
 OBJS = $(SRCS:.c=.o)
 
