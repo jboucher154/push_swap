@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 18:12:58 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 18:16:25 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:13:26 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	add_move(t_list **moves, char *move)
 {
 	t_list	*new;
 
-	new = ft_lstnew(move);
-	if (!new)
-		return (0); //exit?
+	new = NULL;
+	while (!new)
+		new = ft_lstnew(move);
 	ft_lstadd_back(moves, new);
 	return (1);
 }
@@ -68,4 +68,10 @@ int	check_if_revsorted(t_list *head, int len)
 	if (len == 1)
 		return (1);
 	return (0);
+}
+
+void	error(void)
+{
+	ft_putendl_fd("Error", 2);
+	exit(1);
 }
