@@ -6,19 +6,17 @@
 #    By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 11:09:41 by jebouche          #+#    #+#              #
-#    Updated: 2023/01/03 18:33:48 by jebouche         ###   ########.fr        #
+#    Updated: 2023/01/04 15:15:57 by jebouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-LIB = libftprintf.a
+LIB = libft/libft.a
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g
-
-HOME_FLAGS = -g
+CFLAGS = -Wall -Werror -Wextra -I.
 
 DEPS = push_swap.h
 
@@ -38,24 +36,28 @@ SRCS = main.c \
 		utility_two.c \
 		utility_three.c \
 		utility_four.c \
-
+		extras.c 
+		
 OBJS = $(SRCS:.c=.o)
 
-DEBUG = -fsanitize=address
+DEBUG = -g -fsanitize=address
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(HOME_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
+	$(MAKE) -C libft
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
 
 %.o:%.c $(DEPS)
-	$(CC) $(HOME_FLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
+	$(MAKE) clean -C libft
 
 fclean: clean
-	rm -f $(name)
+	$(MAKE) fclean -C libft
+	rm -f $(NAME)
 
 re: fclean all
 
