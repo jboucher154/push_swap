@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 11:26:34 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 18:26:07 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:03:02 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list	*sort_list(t_list **lst_a);
 
 void	sanitize_moves(t_list **moves);
 int		check_double_removal(t_list **move, t_list **to_compare);
-void	print_sanitized(t_list *head);
+// void	print_sanitized(t_list *head);
 void	free_array(char **to_free);
 
 //sorting utility
@@ -56,9 +56,9 @@ void	del_int_content(void *data);
 void	del_str_content(void *data);
 t_list	*lst_pop(t_list **to_remove);
 void	print_str_list(t_list *head);
-//checking utility
 int		check_if_sorted(t_list *head);
 int		check_if_revsorted(t_list *head, int len);
+void	error(void);
 
 //Extras to remove
 void	print_int_list(t_list *head);
