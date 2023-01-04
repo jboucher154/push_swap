@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 12:04:57 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 18:01:50 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 13:48:32 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static int	check_extra_moves(t_list **moves)
 	}
 	return (moved);
 }
+//add check for null moves, exit program if found...
 
 void	sanitize_moves(t_list **moves)
 {
@@ -61,21 +62,5 @@ void	sanitize_moves(t_list **moves)
 	while (moved)
 	{
 		moved = check_extra_moves(moves);
-	}
-}
-
-void	print_sanitized(t_list *head)
-{
-	t_list	*temp;
-
-	temp = head;
-	while (temp)
-	{
-		while (temp && !ft_strncmp(temp->data, "x", 1))
-			temp = temp->next;
-		if (!temp)
-			break ;
-		ft_printf("%s\n", temp->data);
-		temp = temp->next;
 	}
 }
