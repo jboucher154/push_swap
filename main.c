@@ -6,7 +6,7 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:31:21 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/04 11:44:25 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:33:04 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	main(int argc, char **argv)
 	head = NULL;
 	if (argc > 1)
 		read_inputs(&head, argc, argv);
+	else
+		exit(1);
 	if (head == NULL)
 		error();
 	else
 	{
 		moves = sort_list(&head);
-		// print_str_list(moves);
-		// ft_printf("sanitized\n");
 		sanitize_moves(&moves);
 		print_sanitized(moves);
 		ft_lstclear(&head, &del_int_content);
