@@ -6,13 +6,13 @@
 /*   By: jebouche <jebouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 10:55:27 by jebouche          #+#    #+#             */
-/*   Updated: 2023/01/03 18:23:08 by jebouche         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:33:11 by jebouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_three(t_list **moves, t_list **lst_a)
+static void	sort_three(t_list **moves, t_list **lst_a, t_list **lst_b)
 {
 	if (*(int *)(*lst_a)->data < *(int *)(*lst_a)->next->data)
 	{
@@ -26,8 +26,12 @@ static void	sort_three(t_list **moves, t_list **lst_a)
 	}
 	if (!check_if_sorted(*lst_a))
 	{
-		add_move(moves, sa(lst_a));
-		sort_three(moves, lst_a);
+		if (*lst_b && (*lst_b)->next && *(int *)(*lst_b)->data < \
+			*(int *)(*lst_b)->next->data)
+			add_move(moves, ss(lst_a, lst_b));
+		else
+			add_move(moves, sa(lst_a));
+		sort_three(moves, lst_a, lst_b);
 	}
 }
 
@@ -36,7 +40,7 @@ static void	sort_two(t_list **moves, t_list **lst_a, t_list **lst_b)
 	if ((*lst_a)->next && *((int *)(*lst_a)->data) > \
 		*((int *)(*lst_a)->next->data))
 	{
-		if (lst_b && (*lst_b)->next && *(int *)(*lst_b)->data < \
+		if (*lst_b && (*lst_b)->next && *(int *)(*lst_b)->data < \
 			*(int *)(*lst_b)->next->data)
 			add_move(moves, ss(lst_a, lst_b));
 		else
@@ -66,7 +70,7 @@ t_list	*sort_list(t_list **lst_a)
 		if (len == 2)
 			sort_two(&moves, lst_a, &lst_b);
 		else
-			sort_three(&moves, lst_a);
+			sort_three(&moves, lst_a, &lst_b);
 		conquer(&moves, lst_a, &lst_b, &part_sizes);
 	}
 	ft_lstclear(&part_sizes, &del_int_content);
